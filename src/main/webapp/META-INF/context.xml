@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context path="/">
+    <Resource name="jdbc/db" auth="Container" type="javax.sql.DataSource"
+              driverClassName="org.postgresql.Driver"
+              url="${JDBC_DATABASE_URL}"
+              maxTotal="25"
+              maxIdle="10"
+              validationQuery="select 1"/>
+</Context>

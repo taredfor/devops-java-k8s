@@ -1,0 +1,26 @@
+name: Build
+
+on:
+  push:
+    branches: [ master, main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    permissions:
+      contents: read
+      packages: write
+    env:
+      GHCR_REGISTRY: ghcr.io
+      IMAGE: ${{ github.repository }}/webapp
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Push to GitHub Packages
+        uses: docker/build-push-action@v1
+        with:
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          registry: ${{ env.GHCR_REGISTRY }}
+          repository: ${{ env.IMAGE }}
+          tag_with_ref: true
